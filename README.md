@@ -1,2 +1,2 @@
 # aggregator-updater
-Simple library for evaluating aggregators fullness by listned values.
+Simple library for evaluating aggregators fullness by listened values.
