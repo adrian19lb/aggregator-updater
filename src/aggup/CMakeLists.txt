@@ -1,0 +1,36 @@
+include(GNUInstallDirs)
+
+set(INCROOT ${PROJECT_SOURCE_DIR}/include/aggup)
+
+set(SRCROOT ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_library(${PROJECT_NAME} SHARED 
+    ${INCROOT}
+    ${SRCROOT}
+)
+
+set_target_properties(${PROJECT_NAME}
+    PROPERTIES LINKER_LANGUAGE CXX
+    VERSION ${PROJECT_VERSION}
+    SOVERSION 1
+)
+
+target_include_directories(${PROJECT_NAME} 
+    PUBLIC
+        $<BUILD_INTERFACE:${INCROOT}>
+        $<INSTALL_INTERFACE:include/aggup>
+    PRIVATE
+        ${SRCROOT}
+)
+
+install(TARGETS ${PROJECT_NAME} EXPORT MyLibConfig
+    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+install(EXPORT MyLibConfig DESTINATION share/MyLib/cmake)
+
+export(TARGETS ${PROJECT_NAME} FILE MyLibConfig.cmake)
