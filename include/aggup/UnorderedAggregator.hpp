@@ -33,6 +33,7 @@ namespace aggup {
         size_t size() const override;
         bool contain(T const& item) const override;
         bool contain(Aggregator<T> const& aggregator) const override;
+        void add(T item) override;
     private:
         bool areAllItemsIncludedFrom(UnorderedAggregator const& source) const;
     private:

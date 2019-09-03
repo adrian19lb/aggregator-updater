@@ -9,6 +9,7 @@ namespace aggup {
     class Aggregator {
     public:
         virtual ~Aggregator() = default;
+        virtual void add(T item) = 0;
         virtual bool contain(T const& item) const = 0;
         virtual bool contain(Aggregator<T> const& aggupgregator) const = 0;
         virtual size_t size() const = 0;

@@ -26,6 +26,10 @@ namespace aggup::testing {
             return isContain;
         }
 
+        void add(T item) override {
+        
+        }
+
     private:
         size_t length;
     };

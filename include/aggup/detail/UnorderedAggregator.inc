@@ -47,6 +47,11 @@ namespace aggup {
 
         return std::move( UnorderedAggregator<T>(newItems) );
     }
+
+    template<typename T, typename Hasher, typename Comperator>
+    void UnorderedAggregator<T, Hasher, Comperator>::add(T item) {
+        items.insert(item);
+    }
     
     template<typename T, typename Hasher, typename Comperator>    
     size_t UnorderedAggregator<T, Hasher, Comperator>::size() const {
