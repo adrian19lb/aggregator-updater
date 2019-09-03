@@ -18,9 +18,9 @@ namespace aggup {
         void makeMove(unorder_set<T> const& items);
     public:
         UnorderedAggregator(std::initializer_list<T> items);
+        UnorderedAggregator() = default;
         UnorderedAggregator(UnorderedAggregator&& source);
         ~UnorderedAggregator() = default;
-        UnorderedAggregator() = delete;
         UnorderedAggregator(UnorderedAggregator<T, Hasher, Comperator> const& items) = delete;
         UnorderedAggregator& operator=(UnorderedAggregator const& items) = delete;
         UnorderedAggregator& operator=(UnorderedAggregator&& source);
