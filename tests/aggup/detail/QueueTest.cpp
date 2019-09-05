@@ -8,16 +8,18 @@ namespace aggup::detail::testing {
     class QueueTest : public ::testing::Test {
     public:
         void SetUp() override {
-            stubListenerOneInteger.listened = 1;
-            stubListenerTwoInteger.listened = 2;
+            stubListenerOneInteger = std::make_unique<StubListener<int>>();
+            stubListenerTwoInteger = std::make_unique<StubListener<int>>();
+            stubListenerOneInteger->listened = 1;
+            stubListenerTwoInteger->listened = 2;
         }
 
-        StubListener<int> stubListenerOneInteger;
-        StubListener<int> stubListenerTwoInteger;
+        std::unique_ptr< StubListener<int> > stubListenerOneInteger;
+        std::unique_ptr< StubListener<int> > stubListenerTwoInteger;
     };
 
     TEST_F(QueueTest, testIterationQueueIsFilled) {
-        Queue<int> queue(&stubListenerOneInteger, &stubListenerTwoInteger);
+        Queue<int> queue( std::move(stubListenerOneInteger), std::move(stubListenerTwoInteger));
         queue.pull();
         auto iterator = queue.createIterator();
         
@@ -33,7 +35,7 @@ namespace aggup::detail::testing {
     }
 
     TEST_F(QueueTest, testIterationQueueIsEmpty) {
-        Queue<int> queue(&stubListenerOneInteger, &stubListenerTwoInteger);
+        Queue<int> queue(std::move(stubListenerOneInteger), std::move(stubListenerTwoInteger));
         auto iterator = queue.createIterator();
 
         iterator->next();

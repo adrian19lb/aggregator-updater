@@ -9,8 +9,8 @@ namespace aggup::testing {
 
     
     TEST(AggregatorActivatorImpTest, testIfUpdate) {
-        StubListener<int> stubListener;
-        AggregatorActivatorImp<std::string, int> activator(&stubListener);
+        auto stubListener = std::make_unique< StubListener<int> >();
+        AggregatorActivatorImp<std::string, int> activator(std::move(stubListener));
         auto aggregator = std::make_unique< StubAggregator<int> >(1);
         auto aggregatorRawPtr = aggregator.get();
         

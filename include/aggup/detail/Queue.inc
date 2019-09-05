@@ -19,7 +19,7 @@ namespace aggup::detail {
         using value_type = typename std::set<T>::value_type;
     public:
         template<typename... Arg> Queue(Arg... args) {
-            ( listeners.emplace(args),...);
+            ( listeners.emplace(std::move(args)),... );
         }
 
     IteratorUPtr<Queue> createIterator() {
@@ -39,7 +39,7 @@ namespace aggup::detail {
             }
         }
     private:
-        std::set< Listener<T>* > listeners;
+        std::set< std::unique_ptr<Listener<T>> > listeners;
         std::set<T> items;
     };
 }
