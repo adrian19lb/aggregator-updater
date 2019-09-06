@@ -14,7 +14,7 @@ namespace aggup {
     public:
         virtual ~AggregatorActivator() = default;
         virtual bool operator[](Identifier id) = 0;
-        virtual void add(Identifier id, Aggregator<T>* aggregator) = 0;
+        virtual void add(Identifier id, Aggregator<T> const* aggregator) = 0;
         virtual void update() = 0;
     };
 
