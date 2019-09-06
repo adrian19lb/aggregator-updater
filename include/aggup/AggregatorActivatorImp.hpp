@@ -18,13 +18,13 @@ namespace aggup {
     protected:
         virtual std::unique_ptr< detail::ExecutorIterator<detail::Queue, Aggregator, T, detail::ContainerCapacity> > createExecutor();
     public:
-        void add(Id id, AggregatorUPtr<T> aggregator) override;
+        void add(Id id, Aggregator<T>* aggregator) override;
         void update() override;
     protected:
         virtual std::unique_ptr<detail::Iterator< detail::Queue<T> >> createIterator();
     public:
     private:
-        std::map<std::string, AggregatorUPtr<T>> aggregators;
+        std::map< std::string, Aggregator<T>* > aggregators;
         detail::Queue<T> elementsQueue;
         std::unique_ptr< detail::Iterator< detail::Queue<T> >> queueIterator;
         detail::CapacityReceiver capacityReceiver;

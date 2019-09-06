@@ -33,7 +33,7 @@ namespace aggup {
         return elementsQueue.createIterator(); 
     }
     
-    template<typename Id, typename T> void AggregatorActivatorImp<Id, T>::add(Id id, AggregatorUPtr<T> aggregator) {
-        aggregators.emplace( std::make_pair(id, std::move(aggregator)) ); 
+    template<typename Id, typename T> void AggregatorActivatorImp<Id, T>::add(Id id, Aggregator<T>* aggregator) {
+        aggregators.emplace( std::make_pair(id, aggregator) ); 
     }
 }
